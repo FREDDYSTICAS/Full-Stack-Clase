@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
+import CartModal from "./components/ui/CartModal";
 
 import Home from "./screens/Home";
 import Products from "./screens/Products";
@@ -10,7 +11,8 @@ export default function App() {
 // Carrito sea global
 const [cart, setCart] = useState([]);
 
-
+// Estado para el modal del carrito
+const [isCartOpen, setIsCartOpen] = useState(false);
 
 // estado para la notificacion
 const [toast, setToast] = useState("");
@@ -33,17 +35,20 @@ const handleAddToCart = (product) => {
 
   return (
     <BrowserRouter>
-      <MainLayout cartCount={cart.length}>
+      <MainLayout cartCount={cart.length} onCartClick={() => setIsCartOpen(true)}>
         <Routes>
           <Route path="/" element={<Home />} />
-           {/*notificacion visible solo cuando toast tiene texto*/}
           <Route path="/products" element={<Products onAddToCart={handleAddToCart} toast={toast} />} />
           <Route path="/contact" element={<Contact />} />
-
-          {/*notificacion visible solo cuando toast tiene texto*/}
-          {toast && <toast message={toast} />}
         </Routes>
       </MainLayout>
+      
+      {/* Modal del carrito */}
+      <CartModal 
+        isOpen={isCartOpen} 
+        onClose={() => setIsCartOpen(false)} 
+        cart={cart} 
+      />
     </BrowserRouter>
   );
 }

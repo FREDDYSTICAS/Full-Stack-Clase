@@ -7,7 +7,3 @@ export default function Toast({ message }) {
     </div>
   );
 }
-
-// TODO: enviar la funcion onADDTocart a products.jsx
-// TODO: Editar productocard para manejar el evento
-// TODO: Actualizar el nabvar dinamicamente

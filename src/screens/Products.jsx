@@ -7,8 +7,9 @@ setProducts(data) para actualizar el estado de los productos con los datos obten
 
 */
 import { useEffect, useState } from "react";
+import Toast from "../components/ui/Toast";
 
-export default function Products() {
+export default function Products({ onAddToCart, toast }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -44,13 +45,19 @@ export default function Products() {
             {/* Precio y botón Comprar */}
             <div className="flex items-center justify-between mt-4">
               <span className="text-xl font-bold text-gray-900">${product.price}</span>
-              <button className="bg-blue-400 text-white px-4 py-2 rounded-lg">
+              <button 
+                onClick={() => onAddToCart(product)}
+                className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition"
+              >
                 Comprar
               </button>
             </div>
           </div>
         ))}
       </div>
+      
+      {/* Notificación Toast */}
+      {toast && <Toast message={toast} />}
     </div>
   );
 }

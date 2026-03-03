@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 
-export default function Navbar() {
+export default function Navbar({ cartCount = 0, onCartClick }) {
   // Estado del menú móvil (true = abierto)
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -33,13 +33,18 @@ export default function Navbar() {
           </li>
 
           {/* Carrito */}
-          <li className="relative cursor-pointer hover:text-blue-400">
+          <li 
+            className="relative cursor-pointer hover:text-blue-400 transition"
+            onClick={onCartClick}
+          >
             <FaShoppingCart className="text-2xl" />
 
             {/* Número del carrito */}
-            <span className="absolute -top-2 -right-3 bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
-              0
-            </span>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-3 bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
+                {cartCount}
+              </span>
+            )}
           </li>
         </ul>
 
@@ -81,9 +86,12 @@ export default function Navbar() {
           </Link>
 
           {/* Carrito en móvil */}
-          <div className="flex items-center text-lg space-x-3">
+          <div 
+            className="flex items-center text-lg space-x-3 cursor-pointer hover:text-blue-400 transition"
+            onClick={() => { onCartClick(); setMenuOpen(false); }}
+          >
             <FaShoppingCart className="text-2xl" />
-            <span>Carrito: 0</span>
+            <span>Carrito: {cartCount}</span>
           </div>
         </div>
       )}

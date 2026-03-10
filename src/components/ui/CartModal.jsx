@@ -64,7 +64,7 @@ export default function CartModal({ isOpen, onClose, cart, onClearCart }) {
         {view === "cart" && (
           <>
             {/* Contenido */}
-            <div className="p-4 overflow-y-auto max-h-[400px]">
+            <div className="p-4 overflow-y-auto max-h-100">
               {cart.length === 0 ? (
                 <p className="text-center text-gray-500 py-8">
                   Tu carrito está vacío
@@ -167,9 +167,9 @@ export default function CartModal({ isOpen, onClose, cart, onClearCart }) {
 
       {/* Mensaje de Éxito Flotante */}
       {showSuccess && (
-        <div className="fixed top-24 left-4 z-[60] animate-fadeIn">
-          <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 max-w-sm">
-            <FaCheckCircle className="text-3xl flex-shrink-0" />
+        <div className="fixed top-24 left-4 z-60 animate-fadeIn">
+          <div className="bg-linear-to-r from-blue-500 to-blue-600 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 max-w-sm">
+            <FaCheckCircle className="text-3xl shrink-0" />
             <div>
               <h3 className="font-bold text-lg">¡Compra exitosa! </h3>
               <p className="text-sm text-blue-100">Tu pedido ha sido procesado correctamente</p>

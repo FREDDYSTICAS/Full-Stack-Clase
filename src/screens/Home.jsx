@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div 
-      className="pt-32 px-6 bg-cover bg-center bg-no-repeat min-h-[400px] relative"
+      className="pt-32 px-6 bg-cover bg-center bg-no-repeat min-h-100 relative"
       style={{
         backgroundImage: "url('https://cdn.dribbble.com/userupload/17579164/file/original-dfaf81a9e0daa572d4e1790e3f3fb4e2.jpg?resize=1024x768&vertical=center')"
       }}

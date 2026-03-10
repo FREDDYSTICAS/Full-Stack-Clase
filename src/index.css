@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tailwindcss";
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
@@ -19,9 +18,31 @@ html, body {
     Roboto, Helvetica, Arial, sans-serif;
   background-color: #ffffff;
   color: #111827;
+  scroll-behavior: smooth;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* Mejoras de responsividad */
+@media (max-width: 640px) {
+  html, body {
+    font-size: 14px;
+  }
+}
+
+/* Botón de WhatsApp flotante */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }

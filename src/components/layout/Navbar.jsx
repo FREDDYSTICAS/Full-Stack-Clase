@@ -29,7 +29,7 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
           </li>
 
           <li className="hover:text-blue-400 transition">
-            <Link to="/contact">Contacto</Link>
+            <a href="#contacto">Contacto</a>
           </li>
 
           {/* Carrito */}
@@ -48,13 +48,30 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
           </li>
         </ul>
 
-        {/* --- BOTÓN HAMBURGUESA (visible solo en móvil) --- */}
-        <button
-          className="md:hidden text-2xl"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+        {/* --- CONTROLES MÓVIL: CARRITO + HAMBURGUESA --- */}
+        <div className="md:hidden flex items-center space-x-4">
+          
+          {/* Icono del Carrito en Móvil */}
+          <button
+            className="relative text-2xl hover:text-blue-400 transition"
+            onClick={onCartClick}
+          >
+            <FaShoppingCart />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </button>
+
+          {/* Botón Hamburguesa */}
+          <button
+            className="text-2xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
       </div>
 
       {/* --- MENÚ MÓVIL DESPLEGABLE --- */}
@@ -77,24 +94,17 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
             Productos
           </Link>
 
-          <Link
-            to="/contact"
+          <a
+            href="#contacto"
             className="block text-lg hover:text-blue-400"
             onClick={() => setMenuOpen(false)}
           >
             Contacto
-          </Link>
-
-          {/* Carrito en móvil */}
-          <div 
-            className="flex items-center text-lg space-x-3 cursor-pointer hover:text-blue-400 transition"
-            onClick={() => { onCartClick(); setMenuOpen(false); }}
-          >
-            <FaShoppingCart className="text-2xl" />
-            <span>Carrito: {cartCount}</span>
-          </div>
+          </a>
         </div>
       )}
     </nav>
   );
 }
+
+

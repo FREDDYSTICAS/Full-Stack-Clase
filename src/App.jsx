@@ -5,7 +5,6 @@ import CartModal from "./components/ui/CartModal";
 
 import Home from "./screens/Home";
 import Products from "./screens/Products";
-import Contact from "./screens/Contact";
 
 export default function App() {
 // Carrito sea global
@@ -29,17 +28,55 @@ const showToast = (text) => {
 
 // funcion para agregar productos al carrito
 const handleAddToCart = (product) => {
-  setCart([...cart, product]);
-  showToast("Producto agregado al carrito😊");
+  // Verificar si el producto ya existe en el carrito
+  const existingProduct = cart.find(item => item.id === product.id);
+  
+  if (existingProduct) {
+    // Si existe, incrementar cantidad
+    setCart(cart.map(item => 
+      item.id === product.id 
+        ? { ...item, quantity: (item.quantity || 1) + 1 }
+        : item
+    ));
+    showToast("Cantidad actualizada en el carrito 📦");
+  } else {
+    // Si no existe, agregar con cantidad 1
+    setCart([...cart, { ...product, quantity: 1 }]);
+    showToast("Producto agregado al carrito ");
+  }
+};
+
+// funcion para eliminar productos del carrito
+const handleRemoveFromCart = (productId) => {
+  setCart(cart.filter(item => item.id !== productId));
+  showToast("Producto eliminado del carrito 🗑️");
+};
+
+// funcion para actualizar cantidad
+const handleUpdateQuantity = (productId, newQuantity) => {
+  if (newQuantity <= 0) {
+    handleRemoveFromCart(productId);
+  } else {
+    setCart(cart.map(item => 
+      item.id === productId 
+        ? { ...item, quantity: newQuantity }
+        : item
+    ));
+  }
+};
+
+// funcion para vaciar el carrito
+const handleClearCart = () => {
+  setCart([]);
+  showToast("Carrito vaciado ");
 };
 
   return (
     <BrowserRouter>
-      <MainLayout cartCount={cart.length} onCartClick={() => setIsCartOpen(true)}>
+      <MainLayout cartCount={cart.reduce((total, item) => total + (item.quantity || 1), 0)} onCartClick={() => setIsCartOpen(true)}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products onAddToCart={handleAddToCart} toast={toast} />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
       </MainLayout>
       
@@ -47,7 +84,10 @@ const handleAddToCart = (product) => {
       <CartModal 
         isOpen={isCartOpen} 
         onClose={() => setIsCartOpen(false)} 
-        cart={cart} 
+        cart={cart}
+        onRemove={handleRemoveFromCart}
+        onUpdateQuantity={handleUpdateQuantity}
+        onClearCart={handleClearCart}
       />
     </BrowserRouter>
   );

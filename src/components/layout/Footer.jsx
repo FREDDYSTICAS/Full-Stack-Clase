@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contacto" className="w-full bg-gray-900 text-gray-300 py-12 px-6">
+    <footer id="contacto" className="w-full bg-[#101828] text-gray-300 py-12 px-6">
       {/* CONTENEDOR PRINCIPAL CENTRADO */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
 
@@ -65,7 +65,7 @@ export default function Footer() {
       </div>
 
       {/* --- LÍNEA DIVISORA HORIZONTAL --- */}
-      <div className="mt-10 border-t border-gray-700 pt-6 text-center">
+      <div className="mt-10 border-t border-[#101828]/30 pt-6 text-center">
         <p className="text-sm text-gray-400">
           © {currentYear} DevMarket — Todos los derechos reservados.
         </p>

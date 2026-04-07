@@ -7,7 +7,7 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full bg-gray-900 text-white shadow-lg fixed top-0 left-0 z-50">
+    <nav className="w-full bg-[#101828] text-white shadow-lg fixed top-0 left-0 z-50">
       {/* CONTENEDOR PRINCIPAL */}
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
@@ -76,7 +76,7 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
 
       {/* --- MENÚ MÓVIL DESPLEGABLE --- */}
       {menuOpen && (
-        <div className="md:hidden bg-gray-800 px-6 py-6 space-y-6 animate-fadeIn">
+        <div className="md:hidden bg-[#101828] px-6 py-6 space-y-6 animate-fadeIn">
           
           <Link
             to="/"
